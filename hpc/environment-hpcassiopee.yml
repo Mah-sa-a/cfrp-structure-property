@@ -1,0 +1,9 @@
+name: fenicsx-env
+channels:
+  - defaults
+dependencies:
+  - fenics-dolfinx
+  - gmsh
+  - dolfinx_mpc
+  - python-gmsh
+prefix: /home/BeeGFS/ExtLabs/LEME/marabkoohichetabi/.conda/envs/fenicsx-env

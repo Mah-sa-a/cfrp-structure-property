@@ -1,0 +1,17 @@
+name: fenicsx-env-312
+channels:
+  - defaults
+dependencies:
+  - dolfinx_mpc
+  - fenics-dolfinx
+  - gmsh
+  - matplotlib
+  - mpi4py
+  - mpich
+  - numpy
+  - pandas
+  - petsc
+  - petsc4py
+  - python-gmsh
+  - python=3.12
+prefix: /home/BeeGFS/ExtLabs/LEME/marabkoohichetabi/.conda/envs/fenicsx-env-312

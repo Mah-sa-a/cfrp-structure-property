@@ -1,0 +1,44 @@
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# SLURM and general logs
+*.out
+*.err
+*.log
+slurm-*.out
+slurm-*.err
+
+# Generated simulation output
+results/
+output/
+*.msh
+*.xdmf
+*.h5
+*.vtu
+*.pvtu
+
+# Generated previews and figures
+*.png
+*.pdf
+
+# Local configuration, credentials, and secrets
+.env
+*.pem
+*.key
+credentials.json
+token.json
+
+# Thesis/manuscript and office documents
+*.docx
+*.pptx
+*.xlsx
