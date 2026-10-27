@@ -1,0 +1,9 @@
+{
+  "study_id": "surrogate_LD18_hard_disk_extension_v1",
+  "source_config": "configs/surrogate_dataset_v1.json",
+  "source_dataset": "results/surrogate_dataset/surrogate_LD18_hard_disk_v1/dataset_with_replacement.csv",
+  "new_realizations_per_fraction": 40,
+  "new_base_seed": 40000,
+  "sample_id_start": 240,
+  "replicate_start": 40
+}

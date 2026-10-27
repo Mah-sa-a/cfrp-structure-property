@@ -9,7 +9,7 @@ The project combines:
 - FEniCSx-based computational homogenization
 - Mesh-convergence verification
 - RVE-size-convergence analysis across multiple random realizations
-- Preparation of simulation data for future surrogate-model development
+- Simulation-dataset generation for surrogate modeling
 
 ## Current workflow
 
@@ -179,6 +179,21 @@ results/packing_study/packing_LD18_v2_40_50/mesh_refinement/
 
 The comparison records contain the original and refined values of
 Exx, Eyy, and Gxy. Original simulation records and meshes are preserved.
+
+## Surrogate dataset generation
+
+The surrogate dataset was constructed through an initial generation
+campaign, a documented sample replacement, and two successive extensions.
+
+The final dataset contains 1,000 development RVEs, 200 fresh interpolation
+RVEs, and 40 legacy interpolation RVEs.
+
+See [Surrogate dataset generation](docs/surrogate_dataset_generation.md)
+for the construction history, required scripts and configurations,
+HPC launchers, output tables, and provenance requirements.
+
+Preprocessing, surrogate-model training, and evaluation are separate
+downstream workflows.
 
 ## Software
 

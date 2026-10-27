@@ -1,0 +1,23 @@
+{
+  "study_id": "surrogate_LD18_hard_disk_extension_v2",
+  "source_config": "configs/surrogate_dataset_v1.json",
+  "source_config_sha256": "4589f1686be9e18ec5b03a1421bba1bc35854b86e3f9a71b2c4aec48515cbb74",
+  "source_dataset": "results/surrogate_dataset/surrogate_LD18_hard_disk_extension_v1/expanded_dataset.csv",
+  "source_dataset_sha256": "bc27e23f09fb078932671dcd7d2adf3fdd6e775c011886ed7a9c161cebbfbc53",
+  "expected_code_sha256": {
+    "generate_surrogate_dataset.py": "6ede893cbd5e2ee601a40bb3055ea353cb84155abed4b25c492a3955a1910b1f",
+    "packing_study.py": "1e851cd690e69bf7be747e96649b9033d45021a0ce49ef55490bef6c322d66d6",
+    "rve_size_convergence_pipeline.py": "9ba97b7be21d50df15744381a5e6c476e4c7d56a87a48e59e839b89419f08672"
+  },
+  "expected_source_records": 440,
+  "existing_main_per_fraction": 80,
+  "existing_interpolation_per_fraction": 10,
+  "new_main_per_fraction": 120,
+  "new_fresh_interpolation_per_fraction": 50,
+  "main_base_seed": 50000,
+  "fresh_interpolation_base_seed": 60000,
+  "sample_id_start": 440,
+  "main_replicate_start": 80,
+  "fresh_interpolation_replicate_start": 10,
+  "fresh_interpolation_split": "interpolation_test_fresh"
+}
