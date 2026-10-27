@@ -138,6 +138,48 @@ Preserve the configuration associated with an existing study.
 The driver checks its configuration hash against saved records;
 use a new study identifier when changing the configuration.
 
+### Mesh-refinement check for saved packing geometries
+
+`packing_mesh_refinement.py` checks mesh sensitivity without regenerating
+the fibre arrangements. For a selected fibre count and replicate, it
+reads the saved geometry and original FE record for both the hard-disk
+and clustered configurations.
+
+The script reuses the meshing and homogenization functions in
+`rve_size_convergence_pipeline.py`. Its material constants must match
+those used for the original packing study.
+
+Available target mesh sizes, in the model's length units, are:
+
+| Level | Far-field mesh size | Interface mesh size |
+|---|---:|---:|
+| Medium | 0.0100 | 0.0030 |
+| Fine | 0.0050 | 0.0015 |
+
+The original V2 records and geometry CSV files must already exist under
+`results/packing_study/packing_LD18_v2_40_50/`.
+
+For example, submit a medium-mesh check from the repository root on HPC:
+
+```bash
+sbatch --export=ALL,N=165,REP=0 scripts/slurm/run_packing_mesh_refinement.slurm
+```
+
+Here, `N` is 165 or 206, and `REP` selects a saved replicate from 0 to 11.
+Each job processes both packing families for that selected pair.
+
+The supplied launcher requests the medium level. The Python script also
+supports `--level fine`.
+
+Refined meshes and comparison records are saved separately under:
+
+```text
+results/packing_study/packing_LD18_v2_40_50/mesh_refinement/
+```
+
+The comparison records contain the original and refined values of
+Exx, Eyy, and Gxy. Original simulation records and meshes are preserved.
+
 ## Software
 
 The complete simulation workflow requires:
