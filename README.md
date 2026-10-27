@@ -30,18 +30,49 @@ cfrp-structure-property/
 │   └── rve_reference/
 │       └── RVE_01_fibers.csv
 ├── docs/
+│   ├── surrogate_dataset_generation.md
+│   ├── surrogate_preprocessing.md
+│   ├── surrogate_training.md
+│   └── surrogate_interpolation_report.md
 ├── examples/
 ├── scripts/
 │   └── slurm/
+│       ├── recover_sample_0084.slurm
+│       ├── run_mesh_convergence.slurm
+│       ├── run_packing_mesh_refinement.slurm
+│       ├── run_packing_study_v2_array.slurm
+│       ├── run_rve_size_convergence_array.slurm
+│       ├── run_surrogate_dataset_extension_v1.slurm
+│       ├── run_surrogate_dataset_extension_v2.slurm
+│       ├── run_surrogate_dataset_v1.slurm
+│       ├── run_surrogate_preprocess_v2.slurm
+│       ├── run_surrogate_training_extended_v2.slurm
+│       └── run_combine_interpolation_240.slurm
 ├── src/
-│   └── rve_simulation/
-│       ├── generate_periodic_fiber_rves_gmsh.py
-│       ├── homogenize_fibre_RVEs_fenicsx.py
-│       ├── mesh_convergence_RVE01.py
-│       ├── rve_size_convergence_pipeline.py
-│       ├── run_single_combo.py
-│       ├── merge_results.py
-│       └── rve_size_convergence_plots.py
+│   ├── rve_simulation/
+│   │   ├── generate_periodic_fiber_rves_gmsh.py
+│   │   ├── generate_surrogate_dataset.py
+│   │   ├── generate_surrogate_dataset_extension.py
+│   │   ├── generate_surrogate_dataset_extension_v2.py
+│   │   ├── homogenize_fibre_RVEs_fenicsx.py
+│   │   ├── merge_results.py
+│   │   ├── mesh_convergence_RVE01.py
+│   │   ├── packing_mesh_refinement.py
+│   │   ├── packing_study.py
+│   │   ├── packing_study_v2.py
+│   │   ├── packing_study_v2_analysis.py
+│   │   ├── plot_packing_paired_effects.py
+│   │   ├── recover_sample_0084.py
+│   │   ├── run_single_combo.py
+│   │   ├── rve_size_convergence_pipeline.py
+│   │   └── rve_size_convergence_plots.py
+│   └── surrogate_modeling/
+│       ├── audit_microstructure_descriptors_v2.py
+│       ├── check_surrogate_preprocessing_v2.py
+│       ├── generate_two_point_statistics_v2.py
+│       ├── normalize_two_point_statistics_v2.py
+│       ├── train_surrogate_extended_v2.py
+│       └── combine_interpolation_240.py
 └── tests/
 ```
 
@@ -216,6 +247,20 @@ interpolation cases without refitting or tuning.
 See [Surrogate model training and evaluation](docs/surrogate_training.md)
 for model definitions, validation settings, execution instructions,
 the recorded final model selection, and output artifacts.
+
+## Pooled interpolation reporting
+
+The reporting workflow combines saved predictions for 200 fresh and
+40 legacy interpolation RVEs, producing pooled metrics and figures
+without fitting models, tuning hyperparameters, or generating new
+predictions.
+
+The pooled prediction table preserves cohort labels, and separate
+cohort metrics remain available for traceability.
+
+See [Pooled interpolation report](docs/surrogate_interpolation_report.md)
+for required inputs, validation checks, the recorded model IDs, execution
+instructions, and output artifacts.
 
 ## Software
 
