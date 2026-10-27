@@ -192,8 +192,18 @@ See [Surrogate dataset generation](docs/surrogate_dataset_generation.md)
 for the construction history, required scripts and configurations,
 HPC launchers, output tables, and provenance requirements.
 
-Preprocessing, surrogate-model training, and evaluation are separate
-downstream workflows.
+## Surrogate dataset preprocessing
+
+The final V2 preprocessing workflow extracts scalar packing descriptors
+and normalized periodic two-point statistics from the completed
+1,240-record dataset, preserving the development, fresh interpolation,
+and legacy interpolation splits.
+
+See [Surrogate dataset preprocessing](docs/surrogate_preprocessing.md)
+for required inputs, software dependencies, execution order, outputs,
+and validation checks.
+
+Surrogate-model training and evaluation are separate downstream workflows.
 
 ## Software
 
