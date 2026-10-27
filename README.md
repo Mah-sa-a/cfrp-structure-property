@@ -203,7 +203,19 @@ See [Surrogate dataset preprocessing](docs/surrogate_preprocessing.md)
 for required inputs, software dependencies, execution order, outputs,
 and validation checks.
 
-Surrogate-model training and evaluation are separate downstream workflows.
+## Surrogate model training and evaluation
+
+The final training workflow compares a quadratic fibre-fraction baseline,
+scalar packing-descriptor Ridge models, and normalized two-point-statistics
+PCA–Ridge models using the 1,000-RVE development dataset.
+
+Model assessment uses repeated nested cross-validation. A separate
+evaluation stage applies saved fitted models to 200 fresh and 40 legacy
+interpolation cases without refitting or tuning.
+
+See [Surrogate model training and evaluation](docs/surrogate_training.md)
+for model definitions, validation settings, execution instructions,
+the recorded final model selection, and output artifacts.
 
 ## Software
 
@@ -222,7 +234,12 @@ The complete simulation workflow requires:
 
 ## Status
 
-This repository is under active development as part of doctoral research. The initial public version focuses on the RVE generation, mesh verification, and homogenization workflow. Surrogate-model training workflows will be added later.
+This repository is under active development as part of doctoral research.
+It includes periodic RVE generation and homogenization, convergence and
+packing-sensitivity studies, staged surrogate-dataset generation, final
+preprocessing, and the primary surrogate-model training and evaluation
+workflow. Additional analysis and manuscript-figure scripts are being
+reviewed for inclusion.
 
 ## Author
 

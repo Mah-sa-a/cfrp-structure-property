@@ -1,0 +1,25 @@
+{
+  "dataset_dir": "results/surrogate_dataset/surrogate_LD18_hard_disk_extension_v2",
+  "output_dir": "results/surrogate_models/extended_study_v2",
+  "random_state": 20261004,
+  "outer_folds": 5,
+  "outer_repetitions": 10,
+  "inner_folds": 4,
+  "ridge_alphas": [
+    1e-06,
+    0.0001,
+    0.01,
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    1000.0
+  ],
+  "pca_components": [
+    20,
+    35,
+    50,
+    75,
+    100
+  ]
+}
