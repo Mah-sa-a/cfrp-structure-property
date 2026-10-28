@@ -273,6 +273,32 @@ See [Packing study V2](docs/packing_study_v2_README.md) for the
 configured design, implementation dependencies, execution procedure,
 analysis outputs, and interpretation limits.
 
+## Environment and reproducibility
+
+The primary HPC environment is `fenicsx-env-312` on HPCassiopee.
+
+A snapshot of that environment, exported on 2026-10-28, is available
+in [environment-hpc-2026-10-28.yml](environment-hpc-2026-10-28.yml).
+It records package versions and channel order, omits build strings,
+and excludes the machine-specific installation prefix.
+
+Python 3.12.14 and successful imports of the main simulation and
+scientific Python packages were confirmed in the existing HPC
+environment. The surrogate workflows also require packages including
+SciPy, scikit-learn, and Joblib, in addition to those listed above.
+
+This snapshot records the environment observed on that date. It does
+not establish the exact historical environment used for every result.
+Environment recreation, multi-node execution, saved-model compatibility,
+and reproduction of accepted numerical results were not tested as
+part of the import check.
+
+See [HPC environment records](hpc/README.md) and
+[HPCassiopee setup notes](hpc/setup_hpcassiopee.md) for details.
+
+No simulations, model training, or evaluations were rerun to prepare
+the snapshot or update this documentation.
+
 ## Software
 
 The complete simulation workflow requires:
