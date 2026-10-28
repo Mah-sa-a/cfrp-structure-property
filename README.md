@@ -30,6 +30,7 @@ cfrp-structure-property/
 │   └── rve_reference/
 │       └── RVE_01_fibers.csv
 ├── docs/
+│   ├── packing_study_v2_README.md
 │   ├── surrogate_dataset_generation.md
 │   ├── surrogate_preprocessing.md
 │   ├── surrogate_training.md
@@ -261,6 +262,16 @@ cohort metrics remain available for traceability.
 See [Pooled interpolation report](docs/surrogate_interpolation_report.md)
 for required inputs, validation checks, the recorded model IDs, execution
 instructions, and output artifacts.
+
+## Packing study V2
+
+The packing workflow compares paired hard-disk and clustered fibre
+arrangements at fixed L/D = 18 and approximately 40% and 50% fibre
+area fraction.
+
+See [Packing study V2](docs/packing_study_v2_README.md) for the
+configured design, implementation dependencies, execution procedure,
+analysis outputs, and interpretation limits.
 
 ## Software
 
