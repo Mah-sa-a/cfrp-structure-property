@@ -161,6 +161,8 @@ cfrp-structure-property/
         ├── combine_interpolation_240.py
         ├── generate_two_point_statistics_v2.py
         ├── normalize_two_point_statistics_v2.py
+        ├── plot_figure_6_5.py
+        ├── plot_figure_6_7_nested_cv.py
         ├── run_surrogate_supplement_v2.py
         └── train_surrogate_extended_v2.py
 ```

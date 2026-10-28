@@ -297,3 +297,59 @@ The optional `--fit-final` operation fits additional B2–B5 models
 on development data; it is not required for generating the CV
 or learning-curve summaries and does not perform interpolation
 evaluation.
+
+## Manuscript figures from saved development summaries
+
+The following scripts generate figures from existing summary tables.
+They do not fit models or generate new predictions.
+
+### Figure 6.5: retained-model learning curves
+
+Script:
+
+`src/surrogate_modeling/plot_figure_6_5.py`
+
+Default input:
+
+`results/surrogate_models/supplementary_study_v2/learning/learning_curve_summary.csv`
+
+Selected models are A_quadratic_Vf, B1_mean_std_spacing, and C_PCA100.
+
+The figure shows validation MAE with repetition-level sample standard
+deviations and dashed training-MAE curves. The horizontal axis gives
+training RVEs per fibre-fraction level; total training size is five
+times that value.
+
+### Figure 6.7: repeated nested-CV comparison
+
+Script:
+
+`src/surrogate_modeling/plot_figure_6_7_nested_cv.py`
+
+Default input:
+
+`results/surrogate_models/extended_study_v2/nested_cv_metric_summary.csv`
+
+Selected models are A_quadratic_Vf, B1_mean_std_spacing, and C_PCA100.
+
+Bars show mean repetition-level MAE; error bars use the recorded
+sample standard deviations across ten repetitions directly.
+They are not standard errors or confidence intervals.
+
+### Model identity and outputs
+
+Both figures use the fixed C_PCA100 candidate. This should be
+distinguished from C_PCA_tuned used in the recorded final
+interpolation evaluation.
+
+Each script writes PNG and PDF figures, a selected source-data CSV,
+and caption text. Default output subfolders are figure_6_5 and
+figure_6_7 beside their respective input tables.
+
+Both scripts support --input-csv and --output-dir overrides.
+Their default configuration files are surrogate_supplement_v2.json
+and surrogate_training_extended_v2.json, respectively.
+
+Regenerating figures requires the saved summary tables. Including
+these scripts does not imply that figures or numerical analyses
+were rerun during repository preparation.
