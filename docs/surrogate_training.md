@@ -160,7 +160,7 @@ input hashes, and separation of training and evaluation sample IDs.
 It writes separate predictions and metrics for:
 
 - 200 fresh interpolation cases
-- 40 legacy, previously evaluated interpolation cases
+- 40 legacy interpolation cases, untouched until the final evaluation
 
 These cohorts retain their distinct histories. Aggregating their
 predictions into a 240-case report is a separate downstream step.
@@ -187,3 +187,113 @@ Evaluation produces:
 Preserve configurations, metadata, and accepted results together.
 A successful syntax check alone does not validate the saved models,
 predictions, or numerical results.
+
+## Supplementary model comparisons and learning curves
+
+### Implementation and prerequisites
+
+The supplementary workflow uses:
+
+- `src/surrogate_modeling/run_surrogate_supplement_v2.py`
+- `configs/surrogate_supplement_v2.json`
+- `scripts/slurm/run_nonlinear_cv_v2.slurm`
+- `scripts/slurm/run_learning_curves_full_v2.slurm`
+
+It imports the shared implementation in
+`train_surrogate_extended_v2.py` and requires the completed primary
+study under:
+
+`results/surrogate_models/extended_study_v2/`
+
+It checks primary-study completion, input and source hashes, and
+reference split manifests. Preserve the source and inputs associated
+with accepted results; do not modify them simply to bypass a
+provenance mismatch.
+
+Additional dependencies include XGBoost and threadpoolctl.
+
+### Additional scalar regression methods
+
+The supplementary comparison evaluates:
+
+- B2: Elastic Net
+- B3: random forest
+- B4: radial-basis-function support-vector regression
+- B5: XGBoost
+
+All four use the five-feature `B1_std_spacing` representation.
+Their matched-input Ridge reference is therefore B1 spacing-SD,
+not the six-feature mean-plus-SD configuration retained for the
+primary interpolation comparison.
+
+The configured assessment uses ten repetitions of five outer folds
+and four-fold inner tuning, producing 50 worker tasks. Outer
+partitions are checked against the primary study.
+
+### Balanced learning curves
+
+Learning curves use three repetitions of five outer folds and nine
+training sizes: 5, 10, 20, 32, 48, 64, 96, 128, and 160 RVEs per
+fibre-fraction level.
+
+These correspond to 25–800 training RVEs and 135 worker tasks.
+Validation samples remain unchanged across training sizes within
+each outer split, and smaller training subsets are nested within
+larger ones.
+
+The workflow covers the quadratic baseline, scalar Ridge
+representations, fixed spatial PCA dimensions of 20, 50, and 100,
+and the additional B2–B5 regressors.
+
+Infeasible PCA dimensions are explicitly skipped rather than reduced.
+Validation metrics are pooled across out-of-fold predictions within
+each repetition. Reported error bars are sample standard deviations
+across repetitions, not confidence intervals.
+
+### Execution sequence
+
+The following commands document the procedure for a new study.
+They are not instructions to rerun accepted historical results.
+
+From the repository root, preparation creates task manifests and
+provenance metadata without fitting estimators:
+
+```bash
+python src/surrogate_modeling/run_surrogate_supplement_v2.py --prepare
+```
+
+Submit the worker arrays on the configured HPC system:
+
+```bash
+sbatch scripts/slurm/run_nonlinear_cv_v2.slurm
+sbatch scripts/slurm/run_learning_curves_full_v2.slurm
+```
+
+After all tasks for a mode have completed, generate its summary:
+
+```bash
+python src/surrogate_modeling/run_surrogate_supplement_v2.py --mode cv --summary
+python src/surrogate_modeling/run_surrogate_supplement_v2.py --mode learning --summary
+```
+
+The supplied launchers use the CPU_Compute partition,
+fenicsx-env-312 environment, and at most two simultaneous tasks
+per array. Adapt scheduler settings for another system.
+
+### Outputs and evaluation boundaries
+
+Outputs are stored under:
+
+`results/surrogate_models/supplementary_study_v2/`
+
+They include task-level predictions, metrics, tuning records,
+split manifests, completion markers, aggregated summaries, and
+comparison figures.
+
+All supplementary fitting and prediction use development records.
+The workflow does not score fresh or legacy interpolation cases.
+
+The optional `--fit-final` operation fits additional B2–B5 models
+on development data; it is not required for generating the CV
+or learning-curve summaries and does not perform interpolation
+evaluation.
