@@ -16,12 +16,16 @@ The surrogate training, evaluation, and reporting workflows use
 scientific Python packages including NumPy, Pandas, scikit-learn,
 Joblib, and Matplotlib.
 
-## Files in this folder
+## Environment records and setup files
 
-- `environment-hpcassiopee-py312.yml`: environment specification
-  for the primary Python 3.12 environment, `fenicsx-env-312`.
-- `environment-hpcassiopee.yml`: environment specification for
-  the older development environment, `fenicsx-env`.
+- [environment-hpc-2026-10-28.yml](../environment-hpc-2026-10-28.yml):
+  dated snapshot of the current `fenicsx-env-312` environment,
+  stored at the repository root.
+- `environment-hpcassiopee-py312.yml`: earlier specification for
+  the primary Python 3.12 environment, `fenicsx-env-312`.
+  Retained unchanged.
+- `environment-hpcassiopee.yml`: specification for the older
+  development environment, `fenicsx-env`. Retained unchanged.
 - `setup_hpcassiopee.md`: environment activation and setup notes.
 
 ## Primary environment activation
@@ -35,25 +39,54 @@ conda activate fenicsx-env-312
 Individual Slurm launchers may include their own environment
 activation commands. Review the relevant launcher before submission.
 
+## Current environment snapshot and verification
+
+On 2026-10-28, the current HPC environment was exported using:
+
+```bash
+conda env export -n fenicsx-env-312 --no-builds
+```
+
+The machine-specific `prefix:` entry was removed before committing
+the export as
+[environment-hpc-2026-10-28.yml](../environment-hpc-2026-10-28.yml).
+
+The snapshot records package versions and channel order.
+Build strings were omitted.
+
+A separate check confirmed that the active interpreter belonged to
+`fenicsx-env-312`, used Python 3.12.14, and successfully imported:
+
+- `dolfinx`, `dolfinx_mpc`, and `gmsh`;
+- `mpi4py` and `petsc4py`;
+- `numpy`, `pandas`, and `scipy`;
+- `sklearn`, `joblib`, and `matplotlib`.
+
+No simulations, model training, or evaluations were rerun for
+this check.
+
 ## Current reproducibility limitations
 
-The Python 3.12 specification records the Python minor version,
-but most other package versions are not pinned.
+The dated snapshot records the environment observed on 2026-10-28.
+It does not establish the exact historical environment used to
+produce every accepted numerical result.
 
-The checked-in YAML files also do not explicitly list every package
-required by the final surrogate workflow, including scikit-learn
-and Joblib. This does not establish that those packages were absent
-from the working environment.
+Because build strings were omitted, the snapshot is not an exact
+build-level lockfile. Recreating an environment from this export
+has not been tested.
 
-These files should therefore not be treated as complete records of
-the software versions used for the accepted numerical results.
+Successful imports do not validate multi-node MPI execution,
+complete workflow execution, compatibility with previously saved
+models, or reproduction of accepted numerical results.
 
-Both specifications currently contain an account-specific `prefix`
-path. This identifies an installation location on the original HPC
-system; it is not a portable installation path for other users.
+The two earlier specifications in this folder remain unchanged.
+Most package versions in those files are not pinned, and they do
+not explicitly list every dependency of the final surrogate
+workflow, including scikit-learn and Joblib. Both also retain
+account-specific installation prefixes.
 
-Verifying and recording the complete working environment remains a
-follow-up reproducibility task.
+The dated snapshot includes scikit-learn and Joblib with their
+versions and does not contain the machine-specific prefix.
 
 ## Preservation of accepted results
 

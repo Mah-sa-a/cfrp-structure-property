@@ -6,7 +6,11 @@ The final project workflows used the Python 3.12 Conda environment:
 
 `fenicsx-env-312`
 
-The corresponding checked-in specification is:
+The current environment snapshot, recorded on 2026-10-28, is:
+
+[environment-hpc-2026-10-28.yml](../environment-hpc-2026-10-28.yml)
+
+The earlier specification is retained unchanged at:
 
 `hpc/environment-hpcassiopee-py312.yml`
 
@@ -44,17 +48,43 @@ Workflow instructions are provided in:
 Do not repeat accepted simulations, training, or interpolation
 evaluation merely to check or update these setup notes.
 
+## Current environment verification
+
+On 2026-10-28, the active interpreter was confirmed to belong to
+`fenicsx-env-312` and to use Python 3.12.14.
+
+The following packages imported successfully:
+
+- `dolfinx`, `dolfinx_mpc`, and `gmsh`;
+- `mpi4py` and `petsc4py`;
+- `numpy`, `pandas`, and `scipy`;
+- `sklearn`, `joblib`, and `matplotlib`.
+
+No simulations, model training, or evaluations were rerun for
+this check.
+
 ## Environment-record limitations
 
-The checked-in specifications do not pin most package versions or
-explicitly list every dependency of the final surrogate workflow.
+The dated snapshot records package versions and channel order
+from the current HPC environment. Build strings were omitted,
+and the machine-specific installation prefix was removed.
 
-They also contain installation prefixes specific to the original
-HPC account.
+This is a current environment record, not proof of the exact
+historical environment used for every accepted result. It is not
+an exact build-level lockfile or a tested portable installation
+recipe.
 
-See `hpc/README.md` for the current limitations and the outstanding
-environment-verification task. These files are not yet a verified,
-portable installation recipe.
+Environment recreation, multi-node MPI execution, complete
+workflow execution, saved-model compatibility, and reproduction
+of numerical results were not tested as part of this check.
+
+The earlier specifications in `hpc/` remain unchanged. They do
+not pin most package versions or explicitly list every dependency
+of the final surrogate workflow, and they retain installation
+prefixes specific to the original HPC account.
+
+See [the HPC environment documentation](README.md) for the
+snapshot details, import-check scope, and remaining limitations.
 
 ## Security
 
