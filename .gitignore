@@ -42,3 +42,6 @@ token.json
 *.docx
 *.pptx
 *.xlsx
+
+# Local model-release packages and validation outputs
+/release-assets/
