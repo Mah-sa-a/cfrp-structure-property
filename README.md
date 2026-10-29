@@ -545,6 +545,28 @@ See [Surrogate model training and evaluation](docs/surrogate_training.md)
 for implementation details, validation settings, execution instructions,
 recorded model selection, and output artifacts.
 
+### Saved surrogate models
+
+The fitted models from the extended study v2 are available in the
+[CFRP surrogate-model release](https://github.com/Mah-sa-a/cfrp-structure-property/releases/tag/surrogate-models-extended-study-v2).
+
+Download `cfrp-surrogate-models-extended-study-v2.zip` from the
+release's Assets section. The package contains the saved fitted
+pipelines, training metadata, selected parameters, configuration,
+an HPC environment snapshot, and usage instructions.
+
+Use the package with
+[`predict_saved_surrogates.py`](src/surrogate_modeling/predict_saved_surrogates.py).
+The prediction script requires prepared microstructure descriptors
+and normalized two-point-statistics inputs; it does not require
+retraining. Predictions are returned in GPa.
+
+The prediction workflow was verified on the HPC by reproducing
+2,880 stored prediction values for `A_quadratic_Vf`,
+`B1_mean_std_spacing`, and `C_PCA_tuned`, with a maximum absolute
+difference of 0 GPa. See the release README for input requirements,
+the tested environment, and limitations.
+
 ## Pooled interpolation reporting
 
 The reporting workflow combines saved predictions for 200 fresh and
